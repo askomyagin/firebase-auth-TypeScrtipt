@@ -1,4 +1,5 @@
 import { Form } from './Form';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from 'store/slices/userSlice';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
@@ -7,6 +8,11 @@ import { useAppDispatch } from '../hooks/redux-hooks';
 const SignUp = () => {
     const dispatch = useAppDispatch();
     const history = useNavigate();
+    const [showAlert, setShowAlert] = useState(false);
+
+    const updateAlert = (value: boolean) => {
+        setShowAlert(value);
+    };
 
     const handleRegister = (email: string, password: string) => {
         const auth = getAuth();
@@ -21,9 +27,16 @@ const SignUp = () => {
                 );
                 history('/');
             })
-            .catch(console.error);
+            .catch(() => setShowAlert(true));
     };
-    return <Form title="Register" handleClick={handleRegister} />;
+    return (
+        <Form
+            title="SignUp"
+            handleClick={handleRegister}
+            showAlert={showAlert}
+            updateAlert={updateAlert}
+        />
+    );
 };
 
 export { SignUp };

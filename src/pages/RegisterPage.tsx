@@ -1,14 +1,21 @@
 import { SignUp } from 'components/SignUp';
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { H1, P, PageContainer } from './stylePages';
 
 const RegisterPage = () => {
     return (
-        <div>
-            <h1>Register</h1>
+        <PageContainer>
+            <H1>Registration</H1>
             <SignUp />
-            <Link to="/login">Sing in</Link>
-        </div>
+            <P>
+                <Link
+                    to="/login"
+                    style={{ textDecoration: 'none', color: 'black' }}
+                >
+                    Sign In
+                </Link>
+            </P>
+        </PageContainer>
     );
 };
 
